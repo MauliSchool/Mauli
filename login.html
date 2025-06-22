@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Mauli School</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="login.html" class="active">Login</a>
+  </nav>
+
+  <div class="login-box" id="loginPanel">
+    <h2>Login Panel</h2>
+    <label>Role:</label>
+    <select id="role">
+      <option value="">-- Select Role --</option>
+      <option value="admin">Admin</option>
+      <option value="teacher">Teacher</option>
+      <option value="student">Student</option>
+      <option value="parent">Parent</option>
+    </select>
+
+    <label>Username:</label>
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <label>Password:</label>
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div class="dashboard hidden" id="adminDashboard">
+    <h2>Admin Dashboard</h2>
+    <div class="section">
+      <h3>Upload Homework</h3>
+      <input type="text" placeholder="Class">
+      <input type="text" placeholder="Subject">
+      <textarea placeholder="Homework..."></textarea>
+      <button>Upload</button>
+    </div>
+    <div class="section">
+      <h3>Attendance</h3>
+      <input type="date">
+      <textarea placeholder="List of present students..."></textarea>
+      <button>Submit</button>
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="dashboard hidden" id="teacherDashboard">
+    <h2>Teacher Dashboard</h2>
+    <div class="section">
+      <h3>Upload Homework</h3>
+      <input type="text" placeholder="Class">
+      <input type="text" placeholder="Subject">
+      <textarea placeholder="Homework..."></textarea>
+      <button>Upload</button>
+    </div>
+    <div class="section">
+      <h3>Mark Attendance</h3>
+      <input type="date">
+      <textarea placeholder="List of present students..."></textarea>
+      <button>Submit</button>
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function login() {
+      const role = document.getElementById("role").value;
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (role === "admin" && user === "admin" && pass === "admin123") {
+        showDashboard("adminDashboard");
+      } else if (role === "teacher" && user === "teacher" && pass === "teach123") {
+        showDashboard("teacherDashboard");
+      } else {
+        alert("Only admin/teacher login is active.");
+      }
+    }
+
+    function logout() {
+      document.querySelectorAll('.dashboard').forEach(d => d.classList.add("hidden"));
+      document.getElementById("loginPanel").classList.remove("hidden");
+    }
+
+    function showDashboard(id) {
+      document.getElementById("loginPanel").classList.add("hidden");
+      document.getElementById(id).classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
